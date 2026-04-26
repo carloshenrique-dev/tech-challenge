@@ -1,15 +1,15 @@
+using MechanicalWorkshop.API.Extensions;
 using MechanicalWorkshop.Infrastructure.Persistence;
 using MechanicalWorkshop.Infrastructure.Persistence.Context;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddDatabase(builder.Configuration);
+builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerWithJwt();
 
 var app = builder.Build();
 
@@ -26,6 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
