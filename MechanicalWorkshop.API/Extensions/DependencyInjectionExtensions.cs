@@ -9,13 +9,22 @@ using MechanicalWorkshop.Domain.Interfaces.Repositories;
 using MechanicalWorkshop.Infrastructure.Persistence;
 using MechanicalWorkshop.Infrastructure.Persistence.Repositories;
 using MechanicalWorkshop.Infrastructure.Security;
+using MechanicalWorkshop.Application.Validators;
+using MechanicalWorkshop.API.Middlewares;
+using FluentValidation;
 
 namespace MechanicalWorkshop.API.Extensions;
 
 public static class DependencyInjectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-    {
+    {   
+        // Validators
+        services.AddValidatorsFromAssemblyContaining<CreateCustomerValidator>();
+
+        // Validation Filter
+        services.AddScoped<ValidationFilter>();
+
         // Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
