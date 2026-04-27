@@ -73,6 +73,14 @@ A camada Domain não possui dependências externas. Infrastructure implementa os
 
 ## Como Executar
 
+### Environment Setup
+
+Copie os dados do .env de exemplo e ajuste os valores:
+
+```bash
+cp .env.example .env
+```
+
 ### Com Docker (recomendado)
 
 ```bash
@@ -313,6 +321,14 @@ The Domain layer has zero external dependencies. Infrastructure implements the c
 - (Optional) [.NET 10 SDK](https://dotnet.microsoft.com/download) for local development
 
 ## Getting Started
+
+### Environment Setup
+
+Copy the example environment file and adjust values:
+
+```bash
+cp .env.example .env
+```
 
 ### Running with Docker (recommended)
 
