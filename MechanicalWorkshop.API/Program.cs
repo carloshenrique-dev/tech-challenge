@@ -1,4 +1,5 @@
 using MechanicalWorkshop.API.Extensions;
+using MechanicalWorkshop.API.Middlewares;
 using MechanicalWorkshop.Infrastructure.Persistence;
 using MechanicalWorkshop.Infrastructure.Persistence.Context;
 
@@ -18,6 +19,8 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     await DataSeeder.SeedAsync(context);
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
