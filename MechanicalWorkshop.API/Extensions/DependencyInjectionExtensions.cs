@@ -3,6 +3,7 @@ using MechanicalWorkshop.Application.UseCases.Auth;
 using MechanicalWorkshop.Application.UseCases.Customers;
 using MechanicalWorkshop.Application.UseCases.Vehicles;
 using MechanicalWorkshop.Application.UseCases.Services;
+using MechanicalWorkshop.Application.UseCases.Parts;
 using MechanicalWorkshop.Domain.Interfaces.Repositories;
 using MechanicalWorkshop.Infrastructure.Persistence;
 using MechanicalWorkshop.Infrastructure.Persistence.Repositories;
@@ -49,6 +50,12 @@ public static class DependencyInjectionExtensions
         services.AddScoped<GetServiceUseCase>();
         services.AddScoped<UpdateServiceUseCase>();
         services.AddScoped<DeleteServiceUseCase>();
+
+        // Use Cases - Parts
+        services.AddScoped<CreatePartUseCase>();
+        services.AddScoped<GetPartUseCase>();
+        services.AddScoped<UpdatePartUseCase>();
+        services.AddScoped<DeletePartUseCase>();
 
         return services;
     }
