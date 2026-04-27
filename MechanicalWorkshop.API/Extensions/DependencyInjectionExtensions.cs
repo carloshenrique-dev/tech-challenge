@@ -1,6 +1,8 @@
 using MechanicalWorkshop.Application.Interfaces;
 using MechanicalWorkshop.Application.UseCases.Auth;
+using MechanicalWorkshop.Application.UseCases.Customers;
 using MechanicalWorkshop.Domain.Interfaces.Repositories;
+using MechanicalWorkshop.Infrastructure.Persistence;
 using MechanicalWorkshop.Infrastructure.Persistence.Repositories;
 using MechanicalWorkshop.Infrastructure.Security;
 
@@ -10,6 +12,9 @@ public static class DependencyInjectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        // Unit of Work
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         // Repositories
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
@@ -22,8 +27,14 @@ public static class DependencyInjectionExtensions
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-        // Use Cases
+        // Use Cases - Auth
         services.AddScoped<LoginUseCase>();
+
+        // Use Cases - Customers
+        services.AddScoped<CreateCustomerUseCase>();
+        services.AddScoped<GetCustomerUseCase>();
+        services.AddScoped<UpdateCustomerUseCase>();
+        services.AddScoped<DeleteCustomerUseCase>();
 
         return services;
     }
