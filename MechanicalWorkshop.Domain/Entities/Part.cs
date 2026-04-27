@@ -50,5 +50,9 @@ public class Part
         UpdatedAt = DateTime.UtcNow;
     }
 
+    public void Deactivate() => IsActive = false;
+    
+    public void Activate() => IsActive = true;
+
     public bool IsLowStock() => StockQuantity <= MinimumStock;
 }
